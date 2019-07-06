@@ -7,6 +7,8 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { PostsComponent } from './posts/posts.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TruncatePipe } from './truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,14 @@ import { PostsComponent } from './posts/posts.component';
     TopMenuComponent,
     HomeComponent,
     AboutComponent,
-    PostsComponent
+    PostsComponent,
+    TruncatePipe,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

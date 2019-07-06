@@ -1,3 +1,24 @@
-<p>
-  posts works!
-</p>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <td>User Id</td>
+        <td>User name</td>
+        <td>Post Id</td>
+        <td>Post Title</td>
+        <td>Post Content</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let up of usersPosts">
+        <td>{{up.userId}}</td>
+        <td>{{up.userName}}</td>
+        <td>{{up.postId}}</td>
+        <td title="{{up.postTitle}}">{{up.postTitle | truncate:[30, '...']}}</td>
+        <td title="{{up.postContent}}">{{up.postContent | truncate:[50, '...'] }}</td>
+        <td>Action</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
