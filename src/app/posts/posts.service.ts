@@ -39,4 +39,8 @@ export class PostsService extends BaseService {
     return UserPostModel.combineUsersAndPosts(users, posts);
   }
 
+  deletePost(currentPostId: number) {
+    return this.http.delete(`${environment.apiUrl}/posts/${currentPostId}`);
+  }
+
 }

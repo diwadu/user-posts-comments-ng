@@ -10,6 +10,8 @@ import { PostsComponent } from './posts/posts.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TruncatePipe } from './truncate.pipe';
 import { MyHttpInterceptor } from './common/http-interceptor';
+import * as AnythingThatIsNotDollarSignOrSymbolOrjQuery from "jquery"
+
 
 @NgModule({
   declarations: [

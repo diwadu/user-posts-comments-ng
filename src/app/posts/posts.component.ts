@@ -5,7 +5,6 @@ import { Observable, forkJoin } from 'rxjs';
 import { UserPostModel } from '../common/models/user-post.model';
 import { environment } from 'src/environments/environment';
 
-
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -19,7 +18,8 @@ export class PostsComponent extends BaseComponent implements OnInit {
   paginationNextDisabled = false;
   paginationPageNumber = 0;
   totalCount: number = 0;
-  postContent: string;
+  currentPostContent: string;
+  currentPostId: number;
 
   constructor(private injector: Injector, private postsService: PostsService) {
     super(injector);
@@ -40,7 +40,19 @@ export class PostsComponent extends BaseComponent implements OnInit {
     this.getData(this.paginationStart)
   }
   setPostContent(postContent: string) {
-    this.postContent = postContent;
+    this.currentPostContent = postContent;
+  }
+  setPostId(postId: number) {
+    this.currentPostId = postId;
+  }
+
+  deletePost() {
+    this.postsService.deletePost(this.currentPostId).subscribe(data => {
+      console.log(data);
+      this.paginationStart = 0;
+      this.getData(0);
+      $('#deletePostModal').modal('hide');
+    });
   }
 
   private getData(start: number): void {

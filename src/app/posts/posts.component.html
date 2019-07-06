@@ -10,6 +10,7 @@
         <th scope="col">Post Id</th>
         <th scope="col">Post Title</th>
         <th scope="col">Post Content</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -18,14 +19,17 @@
         <td>{{up.userName}}</td>
         <td>{{up.postId}}</td>
         <td title="{{up.postTitle}}">
-          <a href="#myModal" data-toggle="modal"
+          <a href="#showPostContentModal" data-toggle="modal"
             (click)="setPostContent(up.postContent)">{{up.postTitle | truncate:[30, '...']}}</a>
         </td>
         <td title=" {{up.postContent}}">{{up.postContent | truncate:[50, '...'] }}</td>
+        <td><button class="btn btn-danger" (click)="setPostId(up.postId)" data-toggle="modal"
+            data-target="#deletePostModal">
+            <i class="fa fa-trash"></i></button> </td>
       </tr>
     </tbody>
   </table>
-  <div class="pull-right">
+  <div class=" pull-right">
     <nav aria-label="...">
       <span class="badge badge-info">Paginaion with ajax</span>
       <ul class="pagination pagination-sm">
@@ -39,7 +43,7 @@
     </nav>
   </div>
 
-  <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal" id="showPostContentModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full" role="document">
       <div class="modal-content height-full">
         <div class="modal-header">
@@ -51,12 +55,32 @@
         <div class="modal-body p-4" id="result">
           <div class="row">
             <div class="col-sm-6 col-lg-3">
-              {{postContent}}
+              {{currentPostContent}}
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Please confirm</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Do you really want remove this post?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" (click)="deletePost()">Yes</button>
         </div>
       </div>
     </div>
