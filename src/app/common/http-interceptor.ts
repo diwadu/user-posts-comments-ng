@@ -13,20 +13,18 @@ export class MyHttpInterceptor implements HttpInterceptor {
 
         return next.handle(req).pipe(
             map(event => {
-
-                console.log('MyHttpInterceptor, map', event);
-                if (event instanceof HttpResponse){
-                    console.log('MyHttpInterceptor, map', event.body);
+                if (req.urlWithParams.startsWith("https://jsonplaceholder.typicode.com/posts")) {
+                    if (event instanceof HttpResponse) {
+                        console.log('TOTAL POSTS COUNT:', event.headers.get('x-total-count'));
+                        localStorage.setItem("totalPostsCount", event.headers.get('x-total-count'));
+                    }
                 }
-                
                 return event;
             }),
             catchError(error => {
-                console.log('MyHttpInterceptor, error', error);
                 return throwError(error);
             }),
             finalize(() => {
-                console.log('MyHttpInterceptor, finalize');
             })
         );
     }

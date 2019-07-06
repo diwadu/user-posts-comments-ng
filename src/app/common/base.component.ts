@@ -14,6 +14,12 @@ export class BaseComponent implements OnInit {
 
   ngOnInit() {
   }
-  //@ngtools/webpack/src/index.js
+
+  protected getTotalPostsCount() {
+    if (localStorage.getItem("totalPostsCount") === null) {
+      throw new Error("No total count in local storage!");
+    }
+    return parseInt(localStorage.getItem("totalPostsCount"));
+  }
 
 }

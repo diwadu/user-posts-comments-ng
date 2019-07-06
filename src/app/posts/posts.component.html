@@ -1,18 +1,18 @@
 <div>
-  <table>
+  <table class="table table-sm">
     <thead>
       <tr>
-        <td>User Id</td>
-        <td>User name</td>
-        <td>Post Id</td>
-        <td>Post Title</td>
-        <td>Post Content</td>
-        <td>Action</td>
+        <th scope="col">User Id</th>
+        <th scope="col">User name</th>
+        <th scope="col">Post Id</th>
+        <th scope="col">Post Title</th>
+        <th scope="col">Post Content</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let up of usersPosts">
-        <td>{{up.userId}}</td>
+        <th scope="row">{{up.userId}}</th>
         <td>{{up.userName}}</td>
         <td>{{up.postId}}</td>
         <td title="{{up.postTitle}}">{{up.postTitle | truncate:[30, '...']}}</td>
@@ -21,4 +21,17 @@
       </tr>
     </tbody>
   </table>
+  <div class="pull-right">
+    <nav aria-label="...">
+      <span class="badge badge-info">Paginaion with ajax</span>
+      <ul class="pagination pagination-sm">
+        <li class="page-item">
+          <button (click)="prev()" type="button" [disabled]="paginationPrevDisabled"
+            class="btn btn-success">Prev</button>&nbsp;
+          <button (click)="next()" type="button" [disabled]="paginationNextDisabled"
+            class="btn btn-success">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </div>
