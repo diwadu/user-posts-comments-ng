@@ -1,4 +1,7 @@
 <div>
+  <div class="pull-right">
+
+  </div>
   <table class="table table-sm">
     <thead>
       <tr>
@@ -7,7 +10,6 @@
         <th scope="col">Post Id</th>
         <th scope="col">Post Title</th>
         <th scope="col">Post Content</th>
-        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -15,9 +17,11 @@
         <th scope="row">{{up.userId}}</th>
         <td>{{up.userName}}</td>
         <td>{{up.postId}}</td>
-        <td title="{{up.postTitle}}">{{up.postTitle | truncate:[30, '...']}}</td>
-        <td title="{{up.postContent}}">{{up.postContent | truncate:[50, '...'] }}</td>
-        <td>Action</td>
+        <td title="{{up.postTitle}}">
+          <a href="#myModal" data-toggle="modal"
+            (click)="setPostContent(up.postContent)">{{up.postTitle | truncate:[30, '...']}}</a>
+        </td>
+        <td title=" {{up.postContent}}">{{up.postContent | truncate:[50, '...'] }}</td>
       </tr>
     </tbody>
   </table>
@@ -34,4 +38,28 @@
       </ul>
     </nav>
   </div>
+
+  <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full" role="document">
+      <div class="modal-content height-full">
+        <div class="modal-header">
+          <h5 class="modal-title">Post content</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body p-4" id="result">
+          <div class="row">
+            <div class="col-sm-6 col-lg-3">
+              {{postContent}}
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
