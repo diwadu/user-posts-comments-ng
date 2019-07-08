@@ -4,6 +4,7 @@ import { PostsService } from './posts.service';
 import { Observable, forkJoin } from 'rxjs';
 import { UserPostModel } from '../common/models/user-post.model';
 import { environment } from 'src/environments/environment';
+import * as $ from "jquery"
 
 @Component({
   selector: 'app-posts',
@@ -13,31 +14,42 @@ import { environment } from 'src/environments/environment';
 export class PostsComponent extends BaseComponent implements OnInit {
 
   usersPosts: UserPostModel[];
-  paginationStart: number = 0;
+  //paginationStart: number = 0;
   paginationPrevDisabled = false;
   paginationNextDisabled = false;
-  paginationPageNumber = 0;
-  totalCount: number = 0;
+  //paginationPageNumber = 0;
+  //paginationTotalPages = 0;
+  //paginationCurrentPage = 0;
+  //totalCount: number = 0;
   currentPostContent: string;
   currentPostId: number;
+
+  pagination = {
+    start: 0,
+    pageNumber: 0,
+    pageSize: environment.pageSize,
+    totalPages: 0,
+    totalCount: 0,
+    currentPage: 0
+  };
 
   constructor(private injector: Injector, private postsService: PostsService) {
     super(injector);
   }
 
   ngOnInit() {
-    this.getData(this.paginationStart);
-    this.totalCount = this.getTotalPostsCount();
+    this.getData(this.pagination.start);
+    this.pagination.totalCount = this.getTotalPostsCount();
   }
 
   next(): void {
-    this.paginationStart = this.paginationStart + environment.pageSize;
-    this.getData(this.paginationStart)
+    this.pagination.start = this.pagination.start + environment.pageSize;
+    this.getData(this.pagination.start)
   }
 
   prev(): void {
-    this.paginationStart = this.paginationStart - environment.pageSize;
-    this.getData(this.paginationStart)
+    this.pagination.start = this.pagination.start - environment.pageSize;
+    this.getData(this.pagination.start)
   }
   setPostContent(postContent: string) {
     this.currentPostContent = postContent;
@@ -49,9 +61,10 @@ export class PostsComponent extends BaseComponent implements OnInit {
   deletePost() {
     this.postsService.deletePost(this.currentPostId).subscribe(data => {
       console.log(data);
-      this.paginationStart = 0;
+      this.pagination.start = 0;
       this.getData(0);
-      $('#deletePostModal').modal('hide');
+      jQuery('#deletePostModal').modal('hide');
+
     });
   }
 
@@ -64,17 +77,18 @@ export class PostsComponent extends BaseComponent implements OnInit {
       console.log(this.usersPosts);
       this.setPrevButtonState();
       this.setNextButtonState();
-
+      this.pagination.totalPages = Math.ceil(this.pagination.totalCount / environment.pageSize);
+      this.pagination.currentPage = Math.ceil(start / environment.pageSize) + 1;
     });
   }
 
   private setPrevButtonState(): void {
-    this.paginationStart <= 0 ? this.paginationPrevDisabled = true : this.paginationPrevDisabled = false;
+    this.pagination.start <= 0 ? this.paginationPrevDisabled = true : this.paginationPrevDisabled = false;
   }
 
   private setNextButtonState(): void {
     const totalCount = this.getTotalPostsCount();
-    (totalCount - this.paginationStart) <= environment.pageSize ? this.paginationNextDisabled = true : this.paginationNextDisabled = false;
+    (totalCount - this.pagination.start) <= environment.pageSize ? this.paginationNextDisabled = true : this.paginationNextDisabled = false;
   }
 
 }
