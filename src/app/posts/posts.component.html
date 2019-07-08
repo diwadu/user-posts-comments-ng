@@ -1,5 +1,17 @@
 <div>
   <h1>List of posts with authors</h1>
+  <div class="float-right">
+    <span class="badge badge-info">items per page {{pagination.pageSize}}, {{pagination.totalCount}}
+      results</span>&nbsp;
+    <span>Page {{pagination.currentPage}} of {{pagination.totalPages}}</span>&nbsp;
+    <ul class="pagination pagination-sm d-inline-block">
+      <li class="page-item">
+        <button (click)="prev()" type="button" [disabled]="paginationPrevDisabled"
+          class="btn btn-success">Prev</button>&nbsp;
+        <button (click)="next()" type="button" [disabled]="paginationNextDisabled" class="btn btn-success">Next</button>
+      </li>
+    </ul>
+  </div>
   <table class="table table-sm">
     <thead>
       <tr>
@@ -27,18 +39,6 @@
       </tr>
     </tbody>
   </table>
-  <div class="float-right">
-    <span class="badge badge-info">items per page {{pagination.pageSize}}, {{pagination.totalCount}}
-      results</span>&nbsp;
-    <span>Page {{pagination.currentPage}} of {{pagination.totalPages}}</span>&nbsp;
-    <ul class="pagination pagination-sm d-inline-block">
-      <li class="page-item">
-        <button (click)="prev()" type="button" [disabled]="paginationPrevDisabled"
-          class="btn btn-success">Prev</button>&nbsp;
-        <button (click)="next()" type="button" [disabled]="paginationNextDisabled" class="btn btn-success">Next</button>
-      </li>
-    </ul>
-  </div>
 
   <div class="modal" id="showPostContentModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full" role="document">
