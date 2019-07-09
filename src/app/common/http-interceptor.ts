@@ -3,7 +3,9 @@ import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map, tap, finalize } from "rxjs/operators";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class MyHttpInterceptor implements HttpInterceptor {
 
 

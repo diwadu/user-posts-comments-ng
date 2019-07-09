@@ -1,7 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
 
-@Component({
-})
 export class BaseComponent implements OnInit {
 
   /**

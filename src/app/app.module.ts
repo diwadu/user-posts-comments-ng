@@ -22,7 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AboutComponent,
     PostsComponent,
     TruncatePipe,
-    PostDetailsComponent
+    PostDetailsComponent,
   ],
   imports: [
     BrowserModule,
