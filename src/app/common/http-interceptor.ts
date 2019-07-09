@@ -13,7 +13,7 @@ export class MyHttpInterceptor implements HttpInterceptor {
 
         return next.handle(req).pipe(
             map(event => {
-                if (req.urlWithParams.startsWith("https://jsonplaceholder.typicode.com/posts")) {
+                if (req.urlWithParams === "https://jsonplaceholder.typicode.com/posts") {
                     if (event instanceof HttpResponse) {
                         console.log('TOTAL POSTS COUNT:', event.headers.get('x-total-count'));
                         localStorage.setItem("totalPostsCount", event.headers.get('x-total-count'));

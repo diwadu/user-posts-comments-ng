@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TruncatePipe } from './truncate.pipe';
 import { MyHttpInterceptor } from './common/http-interceptor';
 import * as bootstrap from "bootstrap";
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import * as bootstrap from "bootstrap";
     AboutComponent,
     PostsComponent,
     TruncatePipe,
+    PostDetailsComponent,
 
   ],
   imports: [
