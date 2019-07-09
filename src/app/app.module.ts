@@ -12,6 +12,7 @@ import { TruncatePipe } from './truncate.pipe';
 import { MyHttpInterceptor } from './common/http-interceptor';
 import * as bootstrap from "bootstrap";
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,8 @@ import { PostDetailsComponent } from './post-details/post-details.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
 
   providers: [

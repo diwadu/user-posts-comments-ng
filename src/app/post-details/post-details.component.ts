@@ -5,6 +5,9 @@ import { PostDetailsService } from './post-details.service';
 import { CommentModel } from '../common/models/comment.model';
 import { forkJoin } from 'rxjs';
 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
@@ -16,18 +19,52 @@ export class PostDetailsComponent implements OnInit {
   public comments: CommentModel[];
   public currentCommentId: number;
   public formOpened: boolean = false;
+  public newCommentForm: FormGroup;
+  public submitted: boolean = false;
+  private postId: number;
 
-  constructor(private activatedRoute: ActivatedRoute,
-    private postDetailsService: PostDetailsService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private postDetailsService: PostDetailsService,
+    private formBuilder: FormBuilder) { }
+
 
   ngOnInit() {
-    this.getData(this.activatedRoute.snapshot.params['postId']);
+    this.postId = this.activatedRoute.snapshot.params['postId'];
+    this.getData();
+    this.newCommentForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      body: ['', [Validators.required, Validators.minLength(20)]]
+    });
   }
 
-  getData(postId: number) {
+  get f() {
+    return this.newCommentForm.controls;
+  }
 
-    const post$ = this.postDetailsService.getPostById(postId);
-    const comments$ = this.postDetailsService.getPostComments(postId);
+  onSubmit() {
+    this.submitted = true;
+    if (this.newCommentForm.invalid) {
+      return;
+    }
+    let comment = new CommentModel(0,
+      this.postId,
+      this.newCommentForm.get('name').value,
+      this.newCommentForm.get('email').value,
+      this.newCommentForm.get('body').value
+    );
+    this.postDetailsService.createComment(comment).subscribe(val => {
+      $('#alertCommentCreated').show();
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  getData() {
+
+    const post$ = this.postDetailsService.getPostById(this.postId);
+    const comments$ = this.postDetailsService.getPostComments(this.postId);
 
     forkJoin([post$, comments$]).subscribe(val => {
       console.log(val);
@@ -43,7 +80,7 @@ export class PostDetailsComponent implements OnInit {
   deleteComment() {
     this.postDetailsService.deleteComment(this.currentCommentId).subscribe(data => {
       console.log(data);
-      this.getData(this.activatedRoute.snapshot.params['postId']);
+      this.getData();
       jQuery('#deleteCommentModal').modal('hide');
 
     });

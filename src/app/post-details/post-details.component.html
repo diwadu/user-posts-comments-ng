@@ -20,18 +20,37 @@
 <div class="clearfix"></div>
 
 <div class="float-left add-comment-div" *ngIf="formOpened">
-  <form>
+  <div id="alertCommentCreated" class="alert alert-success alert-dismissible fade show" role="alert"
+    style="display:none;">
+    <strong>Comment created</strong>
+    <button type="button" class="close" aria-label="Close" onclick="$('.alert').hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="newCommentForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="comment-name">Name</label>
-      <input type="text" class="form-control" id="comment-name" placeholder="Your name">
+      <input formControlName="name" type="text" class="form-control" id="comment-name" placeholder="Your name">
+      <small *ngIf="submitted && f.name.errors">
+        <span class="text-red" *ngIf="f.name.errors.required">Name is required</span>
+      </small>
     </div>
     <div class="form-group">
       <label for="comment-email">Email</label>
-      <input type="email" class="form-control" id="comment-email" placeholder="Your email">
+      <input formControlName="email" type="email" class="form-control" id="comment-email" placeholder="Your email">
+      <small *ngIf="submitted && f.email.errors">
+        <span class="text-red" *ngIf="f.email.errors.required">Email is required</span>
+        <span class="text-red" *ngIf="f.email.errors.email">Email must be a valid email address</span>
+      </small>
+
     </div>
     <div class="form-group">
       <label for="comment-body">Example textarea</label>
-      <textarea class="form-control" id="comment-body" rows="3"></textarea>
+      <textarea formControlName="body" class="form-control" id="comment-body" rows="3"></textarea>
+      <small *ngIf="submitted && f.body.errors">
+        <span class="text-red" *ngIf="f.body.errors.required">Comment is required</span>
+        <span class="text-red" *ngIf="f.body.errors.minlength">Comment must be at least 20 characters</span>
+      </small>
     </div>
     <button class="btn btn-success">Submit</button>
   </form>

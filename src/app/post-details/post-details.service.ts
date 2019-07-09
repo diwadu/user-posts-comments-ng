@@ -12,6 +12,7 @@ import { CommentModel, CommentModelAdapter } from '../common/models/comment.mode
     providedIn: 'root'
 })
 export class PostDetailsService extends BaseService {
+
     constructor(
         private http: HttpClient,
         private postModelAdapter: PostModelAdapter,
@@ -34,5 +35,9 @@ export class PostDetailsService extends BaseService {
 
     deleteComment(commentId: number) {
         return this.http.delete(`${environment.apiUrl}/comments/${commentId}`);
+    }
+
+    createComment(comment: CommentModel) {
+        return this.http.post(`${environment.apiUrl}/comments`, comment);
     }
 }
