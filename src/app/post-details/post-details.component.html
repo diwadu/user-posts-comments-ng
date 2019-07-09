@@ -7,7 +7,81 @@
 <br />
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">{{postData?.title}}</h5>
-    <p class="card-text">{{postData?.content}}</p>
+    <h5 class="card-title">{{post?.title}}</h5>
+    <p class="card-text">{{post?.content}}</p>
   </div>
+</div>
+<h2>Comments</h2>
+
+<div class="float-left add-comment-button">
+  <button class="btn btn-success" (click)="openCloseForm()"><i class="fa fa-plus"></i>&nbsp; Add post</button>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="float-left add-comment-div" *ngIf="formOpened">
+  <form>
+    <div class="form-group">
+      <label for="comment-name">Name</label>
+      <input type="text" class="form-control" id="comment-name" placeholder="Your name">
+    </div>
+    <div class="form-group">
+      <label for="comment-email">Email</label>
+      <input type="email" class="form-control" id="comment-email" placeholder="Your email">
+    </div>
+    <div class="form-group">
+      <label for="comment-body">Example textarea</label>
+      <textarea class="form-control" id="comment-body" rows="3"></textarea>
+    </div>
+    <button class="btn btn-success">Submit</button>
+  </form>
+</div>
+<div>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Post Id</th>
+        <th scope="col">Email</th>
+        <th scope="col">Name</th>
+        <th scope="col">Body</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of comments">
+        <th scope="row">{{c.id}}</th>
+        <td>{{c.postId}}</td>
+        <td>{{c.email}}</td>
+        <td>{{c.name}}</td>
+        <td>{{c.body}}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="setCommentId(c.id)" data-toggle="modal"
+            data-target="#deleteCommentModal">
+            <i class="fa fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="deleteCommentModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Please confirm</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Do you really want remove this comment?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" (click)="deleteComment()">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

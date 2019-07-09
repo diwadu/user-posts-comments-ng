@@ -35,12 +35,6 @@ export class PostsService extends BaseService {
     );
   }
 
-  getPostById(postId: number): Observable<PostModel> {
-    return this.http.get<PostModel>(`${environment.apiUrl}/posts/${postId}`).pipe(
-      map((data: any) => this.postModelAdapter.adapt(data))
-    )
-  }
-
   combineUsersAndPosts(users: UserModel[], posts: PostModel[]): UserPostModel[] {
     return UserPostModel.combineUsersAndPosts(users, posts);
   }

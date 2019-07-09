@@ -14,15 +14,11 @@ import * as $ from "jquery"
 export class PostsComponent extends BaseComponent implements OnInit {
 
   usersPosts: UserPostModel[];
-  //paginationStart: number = 0;
   paginationPrevDisabled = false;
   paginationNextDisabled = false;
-  //paginationPageNumber = 0;
-  //paginationTotalPages = 0;
-  //paginationCurrentPage = 0;
-  //totalCount: number = 0;
   currentPostContent: string;
   currentPostId: number;
+
 
   pagination = {
     start: 0,
@@ -51,9 +47,11 @@ export class PostsComponent extends BaseComponent implements OnInit {
     this.pagination.start = this.pagination.start - environment.pageSize;
     this.getData(this.pagination.start)
   }
+
   setPostContent(postContent: string) {
     this.currentPostContent = postContent;
   }
+
   setPostId(postId: number) {
     this.currentPostId = postId;
   }

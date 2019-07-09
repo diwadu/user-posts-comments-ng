@@ -13,7 +13,6 @@ import { MyHttpInterceptor } from './common/http-interceptor';
 import * as bootstrap from "bootstrap";
 import { PostDetailsComponent } from './post-details/post-details.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,14 +21,14 @@ import { PostDetailsComponent } from './post-details/post-details.component';
     AboutComponent,
     PostsComponent,
     TruncatePipe,
-    PostDetailsComponent,
-
+    PostDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
+
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true },
   ],
