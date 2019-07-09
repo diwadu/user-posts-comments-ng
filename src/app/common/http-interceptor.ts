@@ -7,8 +7,7 @@ import { catchError, map, tap, finalize } from "rxjs/operators";
     providedIn: 'root'
 })
 export class MyHttpInterceptor implements HttpInterceptor {
-
-
+    
     constructor() { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
