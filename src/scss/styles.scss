@@ -2,15 +2,14 @@
 
 //bootstrap
 
-@import "bootstrap/variables"; //this must be first in order to override
-@import "~bootstrap/scss/bootstrap.scss";
-
-h1{
-    font-size: 1.5rem;
-    margin: 1rem 0 1rem 0;
+@import "bootstrap/variables"; //overrides
+@import "~bootstrap/scss/bootstrap";
+h1 {
+  font-size: 1.5rem;
+  margin: 1rem 0 1rem 0;
 }
 
-h2{
-    font-size: 1.3rem;
-    margin: 1rem 0 1rem 0;
+h2 {
+  font-size: 1.3rem;
+  margin: 1rem 0 1rem 0;
 }
