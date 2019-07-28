@@ -25,7 +25,7 @@ export class PostDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private postDetailsService: PostDetailsService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.postId = this.activatedRoute.snapshot.params["postId"];
@@ -84,7 +84,7 @@ export class PostDetailsComponent implements OnInit {
       .subscribe(data => {
         console.log(data);
         this.getData();
-        jQuery("#deleteCommentModal").modal("hide");
+        (<any>jQuery("#deleteCommentModal")).modal("hide");
       });
   }
 

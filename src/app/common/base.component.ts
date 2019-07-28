@@ -15,7 +15,8 @@ export class BaseComponent implements OnInit {
 
   protected getTotalPostsCount() {
     if (localStorage.getItem("totalPostsCount") === null) {
-      throw new Error("No total count in local storage!");
+      console.log("No total count in local storage!");
+      return 0;
     }
     return parseInt(localStorage.getItem("totalPostsCount"));
   }

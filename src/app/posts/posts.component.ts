@@ -61,7 +61,7 @@ export class PostsComponent extends BaseComponent implements OnInit {
       console.log(data);
       this.pagination.start = 0;
       this.getData(0);
-      jQuery('#deletePostModal').modal('hide');
+      (<any>jQuery('#deletePostModal')).modal('hide');
 
     });
   }
