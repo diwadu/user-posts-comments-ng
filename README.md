@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
 
 ## Disclaimer
-This project is still under development, I don't know final shape yet, so stay tuned = updates will come soon :)
+This project is still under development, I don't know final shape yet, so stay tuned - updates will come soon :)
 
 ## Demo
 You can find demo on `https://diwadu.github.io/users-posts-comments-ng/index.html`. 
